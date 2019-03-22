@@ -1,20 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows;
-using Microsoft.AspNetCore.SignalR.Client;
+using QwirkleAI.Models;
 
 namespace QwirkleAI
 {
-	public class ClientHub
+    public class ClientHub
 	{
-
-		private HubConnection connection;
-		public List<string> messagesList;
+        public HubConnection connection;
+        public List<string> MessagesList;
 
 		public ClientHub(string ip)
 		{
-			messagesList = new List<string>();
+			MessagesList = new List<string>();
 			connection = new HubConnectionBuilder().WithUrl(ip).Build();
 
 
@@ -22,9 +21,9 @@ namespace QwirkleAI
 
 			ConnectToServer();
 			RegisterAI();
-		}
+        }
 
-		private void registerEvent()
+        private void registerEvent()
 		{
 			//closed event
 			connection.Closed += async (error) =>
@@ -34,32 +33,32 @@ namespace QwirkleAI
 			};
 		}
 
-		private async void ConnectToServer()
-		{
-			connection.On<string, string>("ReceiveMessage", (user, message) =>
-			{
-				messagesList.Add(message);
-			});
+        private void ConnectToServer()
+        {
+            connection.On<string, string>("ReceiveMessage", (user, message) =>
+            {
+                MessagesList.Add(message);
+            });
 
-			try
-			{
-				await connection.StartAsync();
-				messagesList.Add("Connection started");
+            try
+            {
+                connection.StartAsync().Wait();
+                MessagesList.Add("Connection started");
 
-			}
-			catch (Exception ex)
-			{
-				
-				messagesList.Add(ex.Message);
-			}
-		}
+            }
+            catch (Exception ex)
+            {
 
-		private async void RegisterAI()
+                MessagesList.Add(ex.Message);
+            }
+        }
+
+        private async void RegisterAI()
 		{
             try
             {
                 await connection.InvokeAsync("Register", "Basic AI", false);
-                //messageList.Add("AI Registered");
+                MessagesList.Add("AI Registered");
             }
             catch (Exception e)
             {
