@@ -34,8 +34,7 @@ namespace QwirkleAI
         {
             connection.On<Guid>("JoinGame", (gameId) =>
             {
-                _aiBusi.CreateAIJoinGame(null, gameId);
-                var game = connection.InvokeAsync<Game>("JoinGame", gameId).Result;
+                _aiBusi.CreateAIJoinGame(gameId);
             });
         }
     }

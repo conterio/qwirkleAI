@@ -17,7 +17,7 @@ namespace QwirkleAI
             try
             {
                 var aiRepository = serviceProvider.GetService<IAIRepository>();
-                aiRepository.AddAI("TestConnecitonId");
+                //aiRepository.AddAI("TestConnecitonId");
                 var aiBusi = serviceProvider.GetService<IAIBusi>();
                 var clientApp = serviceProvider.GetService<ClientApp>();
                 clientApp.Run();

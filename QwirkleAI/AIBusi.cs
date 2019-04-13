@@ -6,8 +6,9 @@ namespace QwirkleAI
 {
     public interface IAIBusi
     {
-        void CreateAIJoinGame(string connectionId, Guid gameId);
-        void RemoveAI(string connectionId);
+		void CreateAIJoinGame(Guid gameId);
+
+		void RemoveAI(string connectionId);
     }
     public class AIBusi : IAIBusi
     {
@@ -16,15 +17,23 @@ namespace QwirkleAI
         {
             _aiRepository = aiRepository;
         }
-        public void CreateAIJoinGame(string connectionId, Guid gameId)
-        {
-            _aiRepository.AddAI(connectionId);
-            //TODO join game
-        }
 
-        public void RemoveAI(string connectionId)
+		public void CreateAIJoinGame(Guid gameId)
+		{
+			var ai = _aiRepository.AddAI();
+			ai.JoinGame(gameId);
+		}
+
+
+
+		public void RemoveAI(string connectionId)
         {
             _aiRepository.RemoveAI(connectionId);
         }
+
+		public void TakeTurn()
+		{
+
+		}
     }
 }

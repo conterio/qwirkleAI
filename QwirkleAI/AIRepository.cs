@@ -4,7 +4,7 @@ namespace QwirkleAI
 {
     public interface IAIRepository
     {
-        void AddAI(string connectionId);
+        BasicAI AddAI();
         void RemoveAI(string connectionId);
     }
 
@@ -16,10 +16,11 @@ namespace QwirkleAI
             AIs = new ConcurrentDictionary<string, BasicAI>();
         }
 
-        public void AddAI(string connectionId)
+        public BasicAI AddAI()
         {
             var basicAi = new BasicAI();
-            AIs.AddOrUpdate(connectionId, basicAi, (_, __) => basicAi);
+			AIs.AddOrUpdate(basicAi.Id, basicAi, (_, __) => basicAi);
+			return basicAi;
         }
 
         public void RemoveAI(string connectionId)

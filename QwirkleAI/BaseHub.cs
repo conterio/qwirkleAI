@@ -10,7 +10,7 @@ namespace QwirkleAI
 	{
         //private string serverIp = "http://172.24.53.76:52367/hub";
         private string serverIp = "http://localhost:52367/hub";
-        public HubConnection connection;
+        protected HubConnection connection;
         public List<string> MessagesList;
 
         protected BaseHub()

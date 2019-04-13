@@ -4,16 +4,24 @@ using System.Text;
 
 namespace QwirkleAI
 {
-    public class BasicAI
+    public class BasicAI 
     {
-        public BasicAI()
+		public string Id { get; set; }
+		private AIHub AIHub { get; set; }
+		public BasicAI()
         {
-            var aiHub = new AIHub();
+			AIHub = new AIHub(this);
+			Id = AIHub.GetId();
         }
 
         public void JoinGame(Guid gameId)
         {
-
+			AIHub.JoinGame(gameId);
         }
+
+		public void TakeTurn()
+		{
+
+		}
     }
 }
