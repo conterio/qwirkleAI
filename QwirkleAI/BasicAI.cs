@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QwirkleAI.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,6 +9,11 @@ namespace QwirkleAI
     {
 		public string Id { get; set; }
 		private AIHub AIHub { get; set; }
+
+        //Delegates
+        public Action<TurnEvent> takeTurnDelegate = new Action<TurnEvent>(TakeTurn);
+
+
 		public BasicAI()
         {
 			AIHub = new AIHub(this);
@@ -19,7 +25,7 @@ namespace QwirkleAI
 			AIHub.JoinGame(gameId);
         }
 
-		public void TakeTurn()
+		private static void TakeTurn(TurnEvent turnEvent)
 		{
 
 		}

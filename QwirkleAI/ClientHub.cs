@@ -7,6 +7,7 @@ namespace QwirkleAI
     public class ClientHub : BaseHub
     {
         private readonly IAIBusi _aiBusi;
+        private string yourName = "Jeremy's";
 
         public ClientHub(IAIBusi aiBusi)
         {
@@ -20,12 +21,12 @@ namespace QwirkleAI
         {
             try
             {
-                await connection.InvokeAsync("Register", "Basic AI", false);
-                MessagesList.Add("AI Registered");
+                await connection.InvokeAsync("Register", $"{yourName} AI", false);
+                Console.WriteLine($"{yourName} AI Registered");
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine($"{yourName} could not register.");
                 throw;
             }
         }

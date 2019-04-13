@@ -11,14 +11,10 @@ namespace QwirkleAI
         //private string serverIp = "http://172.24.53.76:52367/hub";
         private string serverIp = "http://localhost:52367/hub";
         protected HubConnection connection;
-        public List<string> MessagesList;
 
         protected BaseHub()
 		{
-			MessagesList = new List<string>();
 			connection = new HubConnectionBuilder().WithUrl(serverIp).Build();
-
-
 			registerEvent();
 			ConnectToServer();
         }
@@ -37,19 +33,17 @@ namespace QwirkleAI
         {
             connection.On<string, string>("ReceiveMessage", (user, message) =>
             {
-                MessagesList.Add(message);
+
             });
 
             try
             {
                 connection.StartAsync().Wait();
-                MessagesList.Add("Connection started");
-
+                Console.WriteLine("Base Hub Connection started.");
             }
             catch (Exception ex)
             {
-
-                MessagesList.Add(ex.Message);
+                Console.WriteLine($"Error in connecting to Server.{ex.Message}");
             }
         }
 	}

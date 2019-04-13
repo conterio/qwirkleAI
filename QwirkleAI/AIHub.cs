@@ -9,10 +9,10 @@ namespace QwirkleAI
 {
     public class AIHub : BaseHub
     {
-		private BasicAI myAi;
-		public AIHub(BasicAI _myAi)
+		private readonly BasicAI basicAi;
+		public AIHub(BasicAI _basicAi)
         {
-			myAi = _myAi;
+			basicAi = _basicAi;
 			Initialize();
 			
         }
@@ -30,7 +30,7 @@ namespace QwirkleAI
 		private void Initialize()
         {
 			//TODO implement basic ai functions and call them here
-			//connection.On<TurnEvent>("TurnEvent",(myAi.TakeTurn()));
+			connection.On<TurnEvent>("TurnEvent", basicAi.takeTurnDelegate);
 			//connection.On<EndTurnEvent>("EndTurnEvent",( endTurn);
 			//connection.On<StartGameEvent>("GameStartedEvent",( startGameEvent);
 			//connection.On<EndGameEvent>("GameOverEvent",( endGameEvent);
