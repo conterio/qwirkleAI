@@ -7,15 +7,15 @@ using QwirkleAI.Models;
 
 namespace QwirkleAI
 {
-    public class AIHub : BaseHub
-    {
+	public class AIHub : BaseHub
+	{
 		private readonly BasicAI basicAi;
 		public AIHub(BasicAI _basicAi)
-        {
+		{
 			basicAi = _basicAi;
 			Initialize();
-			
-        }
+
+		}
 
 		public string GetId()
 		{
@@ -28,16 +28,14 @@ namespace QwirkleAI
 		}
 
 		private void Initialize()
-        {
-			//TODO implement basic ai functions and call them here
-			connection.On<TurnEvent>("TurnEvent", basicAi.takeTurnDelegate);
-			//connection.On<EndTurnEvent>("EndTurnEvent",( endTurn);
-			//connection.On<StartGameEvent>("GameStartedEvent",( startGameEvent);
-			//connection.On<EndGameEvent>("GameOverEvent",( endGameEvent);
-			//connection.On<GameInfoEvent>("GameInfoEvent",( gameInfoEvent);
-			//connection.On<PlayerJoinedEvent>("PlayerJoinedEvent",( playerJoinedEvent);
-			//connection.On<PlayerRemovedEvent>("PlayerRemovedEvent",( playerRemovedEvent);
-
+		{
+			connection.On<TurnEvent>("TurnEvent", basicAi.TakeTurn);
+			connection.On<EndTurnEvent>("EndTurnEvent", basicAi.EndTurn);
+			connection.On<StartGameEvent>("GameStartedEvent", basicAi.StartGame);
+			connection.On<EndGameEvent>("GameOverEvent", basicAi.EndGame);
+			connection.On<GameInfoEvent>("GameInfoEvent", basicAi.GameInfo);
+			connection.On<PlayerJoinedEvent>("PlayerJoinedEvent", basicAi.PlayerJoined);
+			connection.On<PlayerRemovedEvent>("PlayerRemovedEvent", basicAi.PlayerRemoved);
 		}
-    }
+	}
 }

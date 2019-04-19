@@ -18,7 +18,7 @@ namespace QwirkleAI
 
         public BasicAI AddAI()
         {
-            var basicAi = new BasicAI();
+            var basicAi = new BasicAI(this);
 			AIs.AddOrUpdate(basicAi.Id, basicAi, (_, __) => basicAi);
 			return basicAi;
         }

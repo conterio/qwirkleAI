@@ -12,8 +12,9 @@ namespace QwirkleAI.Models
         }
         public int Score { get; set; }
         public List<Tile> CurrentHand { get; set; }
-        public string ConnectionId { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
+        public int TurnOrder { get; set; }
         public bool IsHumanPlayer { get; set; }
         public bool IsSpectator { get; set; }
         public bool StillPlaying { get; set; }
